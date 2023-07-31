@@ -1,0 +1,95 @@
+\documentclass[a4paper, 14pt]{article}
+
+%\hypersetup
+%{   colorlinks,
+%    pdftitle={2.1.6. Journal},
+%    pdfauthor={Володин Максим},
+%    allcolors=[RGB]{010 090 200}
+%}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage[top = 2cm, bottom = 2cm, left = 2cm, right = 2cm]{geometry}
+\usepackage{indentfirst}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{pgfplots}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{physics, multirow, float}
+\usepackage{wrapfig, tabularx}
+\usepackage{icomma} % Clever comma: 0,2 - number while 0, 2 - two numbers
+\usepackage{tikz, standalone}
+\usepackage{fancyhdr,fancybox}
+\usepackage{lastpage}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{lstmisc}
+
+\graphicspath{{images/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\restylefloat{table}
+\usetikzlibrary{external}
+
+\mathtoolsset{showonlyrefs = true} % Numbers will appear only where \eqref{} in the text LINKED
+\pagestyle{fancy}
+
+\fancyhf{}
+\fancyhead[R]{Семестровые задания}
+\fancyfoot[R]{\thepage /\pageref{LastPage}}
+%\fancyhead[L]{2.5.1}
+
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+
+    \tableofcontents
+
+    \addcontentsline{toc}{part}{Линейная алгебра} \part*{Линейная алгебра}
+
+    \addcontentsline{toc}{section}{Первое задание} \section*{Первое задание}
+
+    \input{term2_tasks/первое-задание}
+
+    \section*{Второе задание}
+
+    \input{term2_tasks/второе-задание}
+
+    \addcontentsline{toc}{part}{Математический анализ} \part*{Математический анализ}
+
+    \section*{Первое задание} \addcontentsline{toc}{section}{Первое задание}
+
+    \addcontentsline{toc}{subsection}{Перестановочный ряд} \subsection*{Перестановочный ряд}
+
+    В общем случае нельзя считать ряд, полученный перестановкой условно сходящегося ряда, сходящимся.
+
+    Пусть дан условно сходящийся ряд $\sum_{n=1}^{\infty} a_n$, который сходится к $A$.
+    Тогда существует перестановка $\sigma$ натуральных чисел, такая что $\sum_{n=1}^{\infty} a_{\sigma(n)}$ расходится.
+
+    Действительно, по определению условной сходимости, существует такое число $B$, что ряд $\sum_{n=1}^{\infty} |a_n|$
+    расходится, но ряд $\sum_{n=1}^{\infty} b_n$ сходится, где $b_n = |a_n|$ для $a_n \geq 0$ и $b_n = -|a_n|$ для $a_n < 0$.
+    Рассмотрим частичные суммы ряда $\sum_{n=1}^{\infty} b_{\sigma(n)}$.
+    Они могут принимать значения от $-B$ до $B$ (по теореме Римана об упорядочивании условно сходящегося ряда), но
+    так как ряд $\sum_{n=1}^{\infty} b_n$ сходится, то существует такое число $C$, что любая частичная сумма ряда
+    $\sum_{n=1}^{\infty} b_{\sigma(n)}$ не превосходит $C$.
+    Однако, так как ряд $\sum_{n=1}^{\infty} |a_n|$ расходится, то существует такое число $D$, что сумма модулей
+    любых $D$ членов ряда $\sum_{n=1}^{\infty} a_n$ больше $B$.
+    Тогда найдется такое натуральное число $N$, что $\sum_{n=1}^{N} |a_n| > B$.
+    Поскольку $|a_n| \leq b_n$ для всех $n$, то также выполнено $\sum_{n=1}^{N} b_n > B$.
+
+    Теперь рассмотрим ряд $\sum_{n=1}^{\infty} a_{\sigma(n)}$.
+    Его частичная сумма $\sum_{n=1}^{N} a_{\sigma(n)}$ равна сумме $N$ членов ряда $\sum_{n=1}^{\infty} a_n$ с
+    разными знаками и в произвольном порядке.
+    Можно выбрать такое $N$, что $\sum_{n=1}^{N} b_n > B$.
+    Тогда найдутся такие индексы $i$ и $j$ ($i < j$), что $\sum_{n=i}^{j} b_n > B$, а следовательно, сумма $j-i+1$
+    членов ряда $\sum_{n=1}^{\infty} a_{\sigma(n)}$ также превосходит $B$.
+    Это означает, что ряд $\sum_{n=1}^{\infty} a_{\sigma(n)}$ расходится, и мы получили противоречие.
+
+    Таким образом, в общем случае нельзя считать ряд, полученный перестановкой условно сходящегося ряда, сходящимся.
+    Однако, в некоторых случаях, например, если ряд $\sum_{n=1}^{\infty} a_n$ абсолютно сходится, то любая
+    перестановка его членов также будет сходиться к тому же пределу
+
+\end{document}
