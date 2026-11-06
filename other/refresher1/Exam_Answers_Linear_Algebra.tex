@@ -1,0 +1,81 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{geometry}
+\geometry{top=20mm,bottom=20mm,left=25mm,right=15mm}
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true, linkcolor=blue!70!black, citecolor=green!50!black, urlcolor=blue!80!black }
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{amsopn}
+\usepackage{amsfonts}
+%\usepackage{unicode-math}
+\usepackage{amstext}
+
+\theoremstyle{definition}
+\newtheorem{question}{Question}
+\newtheorem{solution}{Solution}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\DeclareMathOperator{\spanop}{span}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Null}{Null}
+
+\title{\textbf{\LARGE Полные ответы на экзаменационные билеты}\\[4mm]
+\Large Подготовка к экзамену по курсу «Refresher: Линейная алгебра»}
+\author{\textbf{Ответы на все теоретические, практические и базовые вопросы}}
+\date{2026}
+
+\begin{document}
+
+    \maketitle
+
+    \tableofcontents
+    \newpage
+
+    \chapter*{Структура экзамена и методические указания}
+    \addcontentsline{toc}{chapter}{Структура экзамена и методические указания}
+
+Экзаменационные материалы курса структурированы по трем категориям сложности и четырем тематическим модулям:
+    \begin{enumerate}
+        \item \textbf{Раздел Theory (Теоретические вопросы):} Требуют глубокого концептуального понимания, вывода
+        фундаментальных формул и строгих математических доказательств
+        (индукция, от противного, спектральная декомпозиция).
+        \item \textbf{Раздел Practice (Практические вопросы):} Направлены на вычислительные методы, пошаговые алгоритмы,
+        практический анализ матричных разложений, диагностику размерностей и прикладные модели (PCA, рекомендательные
+        системы, решение СЛУ).
+        \item \textbf{Раздел Basic (Базовые вопросы):} Охватывают канонические определения, базовые аксиомы,
+        формулировки ключевых теорем и минимальный математический аппарат, необходимый для сдачи курса.
+    \end{enumerate}
+
+В данном пособии приведены исчерпывающие, строгие и наглядные ответы на каждый из 57 экзаменационных вопросов.
+
+    \newpage
+
+% =========================================================================
+% ЧАСТЬ 1: ТЕОРИЯ (THEORY)
+% =========================================================================
+
+    \chapter{Теоретические вопросы (Theory)}
+\input{теоретические-вопросы-(theory)}
+
+    \chapter{Практические вопросы (Practice)}
+\input{практические-вопросы-(practice)}
+
+    \chapter{Базовые вопросы (Basic)}
+\input{базовые-вопросы-(basic)}
+
+\end{document}

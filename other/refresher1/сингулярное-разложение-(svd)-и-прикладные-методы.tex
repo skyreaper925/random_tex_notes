@@ -1,0 +1,188 @@
+    \section{Теорема о сингулярном разложении}
+
+    \begin{theorem}[О сингулярном разложении (SVD)]
+Для любой вещественной матрицы $A \in \mathbb{R}^{m \times n}$ ранга $r \le \min(m, n)$ существуют ортогональные матрицы
+$U \in \mathbb{R}^{m \times m}$ ($U^\top U = I_m$) и $V \in \mathbb{R}^{n \times n}$ ($V^\top V = I_n$), а также
+диагонально-подобная матрица $\Sigma \in \mathbb{R}^{m \times n}$ такие, что:
+\[ A = U \Sigma V^\top. \]
+При этом матрица $\Sigma$ имеет вид:
+\[
+    \Sigma = \begin{pmatrix}
+                 \sigma_1 & & & 0 & \dots & 0 \\
+                 & \ddots & & \vdots & \ddots & \vdots \\
+                 & & \sigma_r & 0 & \dots & 0 \\
+                 0 & \dots & 0 & 0 & \dots & 0 \\
+                 \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+                 0 & \dots & 0 & 0 & \dots & 0
+    \end{pmatrix},
+\]
+где числа $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_r > 0$ называются \textbf{сингулярными числами} матрицы $A$,
+столбцы $u_1, \dots, u_m$ матрицы $U$ — \textbf{левыми сингулярными векторами}, а столбцы $v_1, \dots, v_n$ матрицы $V$
+— \textbf{правыми сингулярными векторами}.
+    \end{theorem}
+
+    \section{Конструктивный вывод SVD из произведения $A^\top A$}
+
+    Рассмотрим матрицу $S \coloneqq A^\top A \in \mathbb{R}^{n \times n}$.
+    \begin{enumerate}
+        \item \textbf{Симметричность:} $S^\top = (A^\top A)^\top = A^\top (A^\top)^\top = A^\top A = S$.
+        \item \textbf{Неотрицательная определенность:} Для любого $x \in \mathbb{R}^n$:
+        \[ x^\top S x = x^\top (A^\top A) x = (Ax)^\top (Ax) = \|Ax\|_2^2 \ge 0. \]
+        Следовательно, по спектральной теореме все собственные значения матрицы $A^\top A$ вещественны и неотрицательны:
+        \[ \lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_r > \lambda_{r+1} = \dots = \lambda_n = 0, \quad \text{где }
+        r = \rank(A^\top A) = \rank(A). \]
+        Существует ортонормированный базис $\mathbb{R}^n$ из собственных векторов $(v_1,\dots, v_n)$ матрицы $A^\top A$:
+        \[ A^\top A v_i = \lambda_i v_i, \quad v_i^\top v_j = \delta_{ij}. \]
+        Векторы $v_1, \dots, v_n$ объявляются \textbf{правыми сингулярными векторами}, а \textbf{сингулярные числа}
+        определяются формулой:
+        \[ \sigma_i \coloneqq \sqrt{\lambda_i} \ge 0. \]
+        \item \textbf{Построение левых сингулярных векторов:} Для $i \in \{1, 2, \dots, r\}$ определим векторы:
+        \[ u_i \coloneqq \frac{1}{\sigma_i} A v_i \in \mathbb{R}^m. \]
+        Проверим их взаимную ортонормированность:
+        \[ \langle u_i, u_j \rangle = u_i^\top u_j = \left(\frac{1}{\sigma_i} A v_i\right)^\top
+        \left(\frac{1}{\sigma_j} A v_j\right) = \frac{1}{\sigma_i \sigma_j} v_i^\top (A^\top A v_j) =
+        \frac{1}{\sigma_i \sigma_j} v_i^\top (\lambda_j v_j) = \frac{\lambda_j}{\sigma_i \sigma_j} (v_i^\top v_j). \]
+        Учитывая, что $v_i^\top v_j = \delta_{ij}$ и $\lambda_i = \sigma_i^2$:
+        \[ \langle u_i, u_j \rangle = \frac{\sigma_j^2}{\sigma_i \sigma_j} \delta_{ij} = \delta_{ij}. \]
+        Таким образом, система векторов $(u_1, \dots, u_r)$ строго ортонормирована в $\mathbb{R}^m$.
+        \item Дополним систему $(u_1, \dots, u_r)$ по Граму-Шмидту до полного ортонормированного базиса
+        $(u_1, \dots, u_m)$ пространства $\mathbb{R}^m$.
+        \item Заметим, что по определению $A v_i = \sigma_i u_i$ при $i \le r$, и $A v_i = 0$ при $i > r$
+        (так как $\|A v_i\|^2 = \lambda_i = 0$).
+        В матричной форме это записывается как: \[ A V = U \Sigma \implies A = U \Sigma V^\top. \]
+    \end{enumerate}
+
+    \section{Теорема об общих ненулевых собственных значениях $A^\top A$ и $A A^\top$}
+
+    \begin{theorem}
+        Матрицы $A^\top A \in \mathbb{R}^{n \times n}$ и $A A^\top \in \mathbb{R}^{m \times m}$ имеют в точности
+        одни и те же ненулевые собственные значения с одинаковыми кратностями.
+    \end{theorem}
+    \begin{proof}
+        Пусть $\lambda \ne 0$ — ненулевое собственное значение матрицы $A^\top A$, и
+        $v \in \mathbb{R}^n$ — соответствующий собственный вектор:
+        \[ (A^\top A) v = \lambda v, \quad v \ne 0. \]
+        Умножим обе части равенства слева на матрицу $A$:
+        \[ A (A^\top A v) = A (\lambda v) \iff (A A^\top) (A v) = \lambda (A v). \]
+        Обозначим вектор $w \coloneqq A v \in \mathbb{R}^m$.
+        Убедимся, что $w \ne 0$.
+        Вычислим его евклидову норму в квадрате:
+        \[ \|w\|_2^2 = w^\top w = (Av)^\top (Av) = v^\top A^\top A v = v^\top (\lambda v) = \lambda \|v\|_2^2. \]
+        Так как $\lambda > 0$ и $v \ne 0$, получаем $\|w\|_2^2 > 0 \implies w \ne 0$.
+        Следовательно, вектор $w = Av$ является ненулевым собственным вектором матрицы $A A^\top$, отвечающим тому
+        же самому собственному значению $\lambda$.
+
+        В силу симметрии (заменяя $A$ на $A^\top$), аналогично доказывается, что любое ненулевое собственное
+        значение матрицы $A A^\top$ является собственным значением матрицы $A^\top A$.
+    \end{proof}
+
+    \section{Формы SVD: полное, редуцированное и внешнее произведение}
+
+    \begin{enumerate}
+        \item \textbf{Полное SVD (Full SVD):}
+        \[ A = U \Sigma V^\top, \quad U \in \mathbb{R}^{m \times m}, \; \Sigma \in \mathbb{R}^{m \times n}, \; V \in
+        \mathbb{R}^{n \times n}. \]
+        \item \textbf{Редуцированное / компактное SVD (Reduced / Thin SVD):}
+        Исключаются нулевые блоки сингулярных чисел.
+        Сохраняются только $r = \rank(A)$ ненулевых компонент:
+        \[ A = U_r \Sigma_r V_r^\top, \quad U_r \in \mathbb{R}^{m \times r}, \; \Sigma_r =
+        \diag(\sigma_1, \dots, \sigma_r) \in \mathbb{R}^{r \times r}, \; V_r \in \mathbb{R}^{n \times r}. \]
+        Столбцы $U_r$ и $V_r$ ортонормированы: $U_r^\top U_r = I_r$, $V_r^\top V_r = I_r$.
+        \item \textbf{Внешне-произведённая форма (Outer-Product Form):}
+        Используя блочное правило умножения «столбец на строку»:
+        \[ A = \sum_{i=1}^r \sigma_i u_i v_i^\top. \]
+        Каждое слагаемое $u_i v_i^\top \in \mathbb{R}^{m \times n}$ представляет собой элементарный строительный
+        кирпичик — матрицу ранга 1, а сингулярное число $\sigma_i$ выступает в роли «веса» или «силы сигнала»
+        данного канала передачи информации.
+    \end{enumerate}
+
+    \section{Геометрический смысл SVD}
+
+    Линейное отображение, задаваемое любой вещественной матрицей $A \in \mathbb{R}^{m \times n}$, переводит единичную
+    гиперсферу пространства $\mathbb{R}^n$ в гиперэллипсоид пространства $\mathbb{R}^m$.
+    Действие $A x = U \Sigma V^\top x$ концептуально распадается на 3 последовательных геометрических шага:
+    \begin{enumerate}
+        \item \textbf{Ортогональный поворот/отражение в пространстве прообразов ($V^\top$):} Вектор $x$
+        поворачивается в базис правых сингулярных векторов $v_i$.
+        Сфера переходит в сферу.
+        \item \textbf{Масштабирование вдоль координатных осей ($\Sigma$):} Пространство растягивается вдоль $i$-й оси с
+        коэффициентом $\sigma_i$.
+        Сфера деформируется в эллипсоид, полуоси которого равны $\sigma_i$.
+        \item \textbf{Ортогональный поворот/отражение в пространстве образов ($U$):} Полученный эллипсоид поворачивается
+        в пространстве $\mathbb{R}^m$ так, что направления его главных полуосей совпадают с левыми сингулярными
+        векторами $u_i$.
+    \end{enumerate}
+
+    \section{Низкоранговая аппроксимация и теорема Эккарта-Янга-Мирского}
+
+    \begin{definition}[Усечённое SVD]
+Для ранга аппроксимации $k < r = \rank(A)$ \textbf{усечённым сингулярным разложением} называется матрица:
+\[ A_k \coloneqq \sum_{i=1}^k \sigma_i u_i v_i^\top = U_k \Sigma_k V_k^\top. \]
+Очевидно, что $\rank(A_k) = k$.
+    \end{definition}
+
+    \begin{theorem}[Теорема Эккарта-Янга-Мирского]
+Матрица $A_k$ является наилучшей аппроксимацией матрицы $A$ среди всех матриц ранга не выше $k$ как в спектральной
+норме, так и в норме Фробениуса:
+\begin{gather*}
+    \min_{\rank(B) \le k} \|A - B\|_2 = \|A - A_k\|_2 = \sigma_{k+1},\\
+    \min_{\rank(B) \le k} \|A - B\|_F = \|A - A_k\|_F = \sqrt{\sum_{i=k+1}^r \sigma_i^2}.\\
+\end{gather*}
+    \end{theorem}
+
+    \begin{example}[Применения низкоранговой аппроксимации]
+\begin{itemize}
+    \item \textbf{Сжатие изображений:} Матрица пикселей размера $m \times n$ требует хранения $m \cdot n$ чисел.
+    Усечённое разложение $A_k$ хранит лишь $k(m + n + 1)$ чисел.
+    При $k \ll \min(m, n)$ достигается многократное сжатие с сохранением основных визуальных деталей.
+    \item \textbf{Латентно-семантический анализ (LSA):} Матрица «термы-документы» проецируется на $k$ скрытых
+    семантических тем, фильтруя синонимический шум.
+\end{itemize}
+    \end{example}
+
+    \section{Псевдообратная матрица Мура-Пенроуза}
+
+    \begin{definition}[Псевдообратная матрица Мура-Пенроуза]
+Пусть $A = U \Sigma V^\top$ — сингулярное разложение матрицы $A \in \mathbb{R}^{m \times n}$.
+\textbf{Псевдообратной матрицей Мура-Пенроуза} называется матрица $A^+ \in \mathbb{R}^{n \times m}$, определяемая
+формулой:
+\[ A^+ \coloneqq V \Sigma^+ U^\top = \sum_{i=1}^r \frac{1}{\sigma_i} v_i u_i^\top, \]
+где матрица $\Sigma^+ \in \mathbb{R}^{n \times m}$ получается из $\Sigma^\top$ заменой каждого ненулевого сингулярного
+числа $\sigma_i > 0$ на обратную величину $\frac{1}{\sigma_i}$, а нули остаются на местах.
+    \end{definition}
+
+    \begin{theorem}[Условия Мура-Пенроуза]
+Матрица $A^+$ является единственной матрицей, удовлетворяющей 4 условиям Мура-Пенроуза:
+\begin{enumerate}
+    \item $A A^+ A = A$;
+    \item $A^+ A A^+ = A^+$;
+    \item $(A A^+)^\top = A A^+$ (ортогональный проектор на $\Col(A)$);
+    \item $(A^+ A)^\top = A^+ A$ (ортогональный проектор на $\Row(A)$).
+\end{enumerate}
+    \end{theorem}
+
+    \begin{theorem}[Оптимальность псевдообратного решения]
+Для любой системы $Ax = b$ вектор $x^* \coloneqq A^+ b$:
+\begin{enumerate}
+    \item Минимизирует невязку наименьших квадратов $\|Ax - b\|_2$:
+    \[ \|A x^* - b\|_2 = \min_{x \in \mathbb{R}^n} \|A x - b\|_2. \]
+    \item Если решений задачи наименьших квадратов бесконечно много, $x^*$ является решением с \textbf{минимальной
+    евклидовой нормой}:
+    \[ \|x^*\|_2 = \min \{ \|x\|_2 \mid x \in \operatorname{Argmin} \|Ax - b\|_2 \}. \]
+\end{enumerate}
+    \end{theorem}
+
+    \section{Рекомендательные системы и латентный факторный анализ}
+
+    Пусть $R \in \mathbb{R}^{m \times n}$ — частично заполненная матрица рейтингов, где строка $u$ соответствует
+    пользователю, а столбец $i$ — фильму или товару.
+    Используя усечённое SVD ранга $k$:
+    \[ R \approx U_k \Sigma_k V_k^\top = (U_k \Sigma_k^{1/2}) (V_k \Sigma_k^{1/2})^\top = P Q^\top. \]
+    \begin{itemize}
+        \item Строки матрицы $P = U_k \Sigma_k^{1/2} \in \mathbb{R}^{m \times k}$ являются $k$-мерными векторами скрытых
+        предпочтений пользователей $p_u$;
+        \item Строки матрицы $Q = V_k \Sigma_k^{1/2} \in \mathbb{R}^{n \times k}$ являются $k$-мерными векторами 
+        латентных характеристик элементов $q_i$;
+        \item Прогноз рейтинга для не просмотренного пользователем фильма вычисляется через скалярное произведение 
+        латентных  векторов: \[ \hat{r}_{ui} = \langle p_u, q_i \rangle = \sum_{f=1}^k p_{uf} q_{if}. \]
+    \end{itemize}

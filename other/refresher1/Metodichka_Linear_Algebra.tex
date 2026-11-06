@@ -1,0 +1,98 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{geometry}
+\geometry{top=20mm,bottom=20mm,left=25mm,right=15mm}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!70!black, citecolor=green!50!black, urlcolor=blue!80!black }
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{amsopn}
+\usepackage{amsfonts}
+%\usepackage{unicode-math}
+\usepackage{amstext}
+
+% Теоремы, определения, замечания
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem{exercise}{Exercise}[chapter]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[chapter]
+
+\DeclareMathOperator{\spanop}{span}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\Null}{Null}
+
+\title{\textbf{\LARGE Линейная алгебра и евклидова геометрия}\\[5mm]
+\Large Полное методическое пособие и конспект курса лекций}
+\author{\textbf{Курс «Refresher: Линейная алгебра»}}
+\date{2026}
+
+\begin{document}
+    
+    \maketitle
+    
+    \tableofcontents
+    \newpage
+    
+    \chapter*{Введение}
+    \addcontentsline{toc}{chapter}{Введение}
+    
+    Настоящее методическое пособие предназначено для глубокого и всестороннего освоения базового и продвинутого курсов
+    линейной алгебры и евклидовой геометрии, а также для системной подготовки к экзамену.
+    
+    В основу пособия положен современный \textbf{бескоординатный подход (Map-First Approach)}:
+    \begin{enumerate}
+        \item \textbf{Первичность геометрических и алгебраических объектов:} Векторы понимаются не как просто
+        упорядоченные наборы чисел в таблице, а как элементы абстрактных векторных пространств.
+        Линейные отображения рассматриваются первично по отношению к матрицам.
+        \item \textbf{Матрицы как координатные представления:} Матрица возникает лишь тогда, когда в пространствах
+        прообразов и образов зафиксированы базисы.
+        \item Смена базиса изменяет матрицу, но оставляет неизменными фундаментальные инварианты оператора: ранг, след,
+        определитель, характеристический полином, собственные и сингулярные значения.
+        \item \textbf{Дуальность и измерения:} Строки матрицы интерпретируются как ковекторы (линейные функционалы,
+        измерительные приборы), нарезающие пространство на параллельные аффинные гиперплоскости (уровневые множества),
+        а столбцы — как образы базисных векторов.
+        \item \textbf{Матричные факторизации как декомпозиция структуры:} Разложения $LU$, $QR$, спектральное разложение
+        симметричных матриц и сингулярное разложение ($SVD$) представлены как последовательное раскрытие геометрического
+        действия оператора в виде суммы простых блоков первого ранга ($u \otimes v^*$).
+    \end{enumerate}
+    
+    Пособие разбито на 4 тематических модуля, полностью соответствующих программе курса и экзаменационным билетам.
+    
+    \newpage
+
+% =========================================================================
+% ГЛАВА 1
+% =========================================================================
+    
+    \chapter{Векторные пространства, дуальность и евклидова геометрия}
+    \input{векторные-пространства,-дуальность-и-евклидова-геометрия}
+
+    \chapter{Матрицы, линейные отображения, ранг и системы уравнений}
+    \input{матрицы,-линейные-отображения,-ранг-и-системы-уравнений}
+
+    \chapter{Собственные значения, спектральная теория и матричные разложения}
+    \input{собственные-значения,-спектральная-теория-и-матричные-разложения}
+
+    \chapter{Сингулярное разложение (SVD) и прикладные методы}
+    \input{сингулярное-разложение-(svd)-и-прикладные-методы}
+
+\end{document}
